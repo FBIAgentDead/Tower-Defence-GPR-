@@ -17,9 +17,9 @@ public class Movement : MonoBehaviour {
     private void Awake()
     {
         player = GetComponent<Rigidbody2D>();
-        Grid a = new Grid(18,20,12);
-        a.CreateGrid();
-        Debug.Log(a.tiles[12].positionX);
+        Grid a = new Grid(40,20,80,40);
+        Debug.Log(a.tiles[12,12].positionX);
+        a.tiles[2, 2].DrawTile();
     }
 
     public bool CheckGrounded()
