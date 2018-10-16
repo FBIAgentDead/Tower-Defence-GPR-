@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tile : MonoBehaviour{
+public class Tile{
 
     public float positionX;
     public float positionY;
-    [SerializeField]
-    private Sprite gridTexture;
-    private SpriteRenderer renderer;
     public TileTypes getTile;
 
     //constructor
@@ -16,14 +13,15 @@ public class Tile : MonoBehaviour{
         positionX = x;
         positionY = y;
         getTile = tileTypes;
-        renderer = GetComponent<SpriteRenderer>();
-        DrawTile();
     }
 
     //this will show the tile
-    public void DrawTile()
+    public void DrawTile(float width, float height, int tileCountX, int tileCountY, bool horizontal)
     {
-        renderer.sprite = gridTexture;
+        if(horizontal == true)
+        Debug.DrawLine(new Vector2(positionX + (width/tileCountX)/2,positionY + (height/tileCountY)/2), new Vector2(positionX + (width / tileCountX)/2,positionY - height), Color.black, Mathf.Infinity);
+        else
+        Debug.DrawLine(new Vector2(positionX - (width/tileCountX)/2,positionY - (height/tileCountY)/2), new Vector2(positionX + width,positionY - (height/tileCountY)/2), Color.black, Mathf.Infinity);
     }
 
 }

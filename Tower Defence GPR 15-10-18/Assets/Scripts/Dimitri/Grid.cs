@@ -22,7 +22,7 @@ public class Grid{
         CreateGrid();
     }
 
-    //hier gaan we het grid in elkaar zetten met behulp van de grote en breedte die zijn megegeven 
+    //creates a new grid with length and height pretty cool right?
     public void CreateGrid()
     {
         float tempX = 0;
@@ -39,6 +39,25 @@ public class Grid{
             yLayer++;
             tempY += (gridHeight / tileAmountY);
         }
+    }
+
+    //draws grid but currently broken :(
+    public void DrawGrid()
+    {
+        for (int i = 0; i < tileAmountX; i++)
+        {
+            tiles[0, i].DrawTile(gridWidth, gridHeight, tileAmountX, tileAmountY, true);
+        }
+        for(int i = 0; i < tileAmountY; i++)
+        {
+            tiles[i, 0].DrawTile(gridWidth, gridHeight, tileAmountX, tileAmountY, false);
+        }
+    }
+
+    //Yet to see if it works...
+    public float PositionIndex(float x, float y)
+    {
+        return Mathf.Floor((x / tileAmountX) * Mathf.Round(x));
     }
 
 }
