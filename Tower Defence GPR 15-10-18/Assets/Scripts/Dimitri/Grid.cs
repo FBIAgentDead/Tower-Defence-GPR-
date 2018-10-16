@@ -19,7 +19,15 @@ public class Grid{
         tileAmountX = tileCountX;
         tileAmountY = tileCountY;
         tiles = new Tile[100,100];
-        CreateGrid();
+        if(tileAmountX > width || tileAmountY > height)
+        {
+            Debug.Log("Make sure the tileCountX or Y isn't bigger than the width or height!");
+        }
+        else
+        {
+            CreateGrid();
+        }
+        
     }
 
     //creates a new grid with length and height pretty cool right?
@@ -37,7 +45,7 @@ public class Grid{
             }
             tempX = 0;
             yLayer++;
-            tempY += (gridHeight / tileAmountY);
+            tempY -= (gridHeight / tileAmountY);
         }
     }
 
@@ -52,12 +60,6 @@ public class Grid{
         {
             tiles[i, 0].DrawTile(gridWidth, gridHeight, tileAmountX, tileAmountY, false);
         }
-    }
-
-    //Yet to see if it works...
-    public float PositionIndex(float x, float y)
-    {
-        return Mathf.Floor((x / tileAmountX) * Mathf.Round(x));
     }
 
 }
