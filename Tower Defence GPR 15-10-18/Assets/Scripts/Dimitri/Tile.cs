@@ -15,11 +15,8 @@ public class Tile{
         getTile = tileTypes;
     }
 
-    //Gets the index for the grid array with use of the transform position
-    public void PositionIndex()
-    {
-
-    }
+    //returns current tile position with the use of vectors
+    public Vector2 position { get { return new Vector2(positionX,positionY); } }
 
     //this will show the tile
     public void DrawTile(float width, float height, int tileCountX, int tileCountY, bool horizontal)
