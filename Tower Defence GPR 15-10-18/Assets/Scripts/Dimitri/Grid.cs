@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grid{
 
     [SerializeField]
-    public Tile[] tiles;
+    public Tile[,] tiles;
     private float gridHeight;
     private float gridWidth;
     private int tileAmount;
@@ -16,18 +16,20 @@ public class Grid{
         gridHeight = height;
         gridWidth = width;
         tileAmount = tileCount;
-        tiles = new Tile[100];
+        tiles = new Tile[100,100];
     }
 
     //hier gaan we het grid in elkaar zetten met behulp van de grote en breedte die zijn megegeven 
     public void CreateGrid()
     {
         float tempX = 0;
+        int yLayer = 0;
         for(int i = 0; i < gridWidth; i++)
         {
-            tiles[i] = new Tile(tempX,0,TileTypes.Available);
+            tiles[yLayer,i] = new Tile(tempX,0,TileTypes.Available);
             tempX += (gridWidth / tileAmount);
         }
+        yLayer++;
     }
 
 }
