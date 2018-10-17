@@ -34,6 +34,22 @@ public class GridScript{
     public float tileSizeX { get { return gridWidth / tileAmountX; } }
     public float tileSizeY { get { return gridHeight / tileAmountY; } }
 
+    //it gets the array lenght x or y so you can check what the array lenght is
+    public float lenghtY { get { return tileAmountY; } }
+    public float lenghtX { get { return tileAmountX; } }
+
+    public int GetTileX(float x)
+    {
+        Debug.Log(Mathf.FloorToInt(x / tileSizeX));
+        return Mathf.FloorToInt(x / tileSizeX);
+    }
+
+    public int GetTileY(float y)
+    {
+        Debug.Log(Mathf.FloorToInt(y / tileSizeY));
+        return Mathf.FloorToInt(y / tileSizeY);
+    }
+
     //creates a new grid with length and height pretty cool right?
     public void CreateGrid()
     {
