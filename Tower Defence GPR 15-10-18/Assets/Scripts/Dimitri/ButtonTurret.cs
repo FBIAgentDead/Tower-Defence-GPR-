@@ -11,15 +11,9 @@ public class ButtonTurret : MonoBehaviour {
     GridScript grid;
     private int position = 0;
 
-    private void Awake()
-    {
-        grid = new GridScript(18, 10, 18, 10);
-        grid.DrawGrid();
-    }
-
     public void onClick()
     {
-        Instantiate(floor, grid.tiles[position,position].position, Quaternion.identity);
-        position++;
+        grid = new GridScript(37, 17, 37, 17);
+        grid.DrawGrid();
     }
 }

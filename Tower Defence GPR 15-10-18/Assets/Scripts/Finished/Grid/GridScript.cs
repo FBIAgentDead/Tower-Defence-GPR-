@@ -18,16 +18,8 @@ public class GridScript{
         gridWidth = width;
         tileAmountX = tileCountX;
         tileAmountY = tileCountY;
-        tiles = new Tile[tileCountY,tileCountX];
-        if(tileAmountX > width || tileAmountY > height)
-        {
-            Debug.LogError("Make sure the tileCountX or Y isn't bigger than the width or height!");
-        }
-        else
-        {
-            CreateGrid();
-        }
-        
+        tiles = new Tile[Mathf.FloorToInt(height/tileSizeY), Mathf.FloorToInt(width/tileSizeX)];
+        CreateGrid();
     }
 
     //these getters can be used to get size for each tile every tile has the same x size and y size
@@ -56,27 +48,29 @@ public class GridScript{
         float tempX = 0;
         float tempY = 0;
         int yLayer = 0;
-        for (int k = 0; k < gridHeight; k++)
+        int timesDone = 0;
+        for (int k = 0; k < (gridHeight/tileSizeY) - 1; k++)
         {
-            for (int i = 0; i < gridWidth; i++)
+            timesDone++;
+            for (int i = 0; i < (gridWidth/tileSizeX) - 1; i++)
             {
                 tiles[yLayer, i] = new Tile(tempX, tempY, TileTypes.Available);
-                tempX += (gridWidth / tileAmountX);
+                tempX += tileSizeX;
             }
             tempX = 0;
             yLayer++;
-            tempY -= (gridHeight / tileAmountY);
+            tempY -= tileSizeY;
         }
     }
 
     //draws grid visual with the use of unity debug.drawline only rendered in the editor for easy use
     public void DrawGrid()
     {
-        for (int i = 0; i < tileAmountX; i++)
+        for (int i = 0; i < (gridWidth/tileSizeX) - 1; i++)
         {
             tiles[0, i].DrawTile(gridWidth, gridHeight, tileAmountX, tileAmountY, true);
         }
-        for(int i = 0; i < tileAmountY; i++)
+        for(int i = 0; i < (gridHeight/tileSizeY) - 1; i++)
         {
             tiles[i, 0].DrawTile(gridWidth, gridHeight, tileAmountX, tileAmountY, false);
         }
