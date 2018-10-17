@@ -3,21 +3,22 @@ using System.Collections;
 
 public class Tile{
 
-    public float positionX;
-    public float positionY;
-    public TileTypes getTile;
+    private float positionX;
+    private float positionY;
+    private TileTypes tile;
 
     //constructor
     public Tile(float x, float y, TileTypes tileTypes)
     {
         positionX = x;
         positionY = y;
-        getTile = tileTypes;
+        tile = tileTypes;
     }
 
     //returns current tile position with the use of vectors
     public Vector2 position { get { return new Vector2(positionX,positionY); } }
-
+    public TileTypes getTile { set { tile = value;  } get { return tile; } }
+    
     //this will show the tile
     public void DrawTile(float width, float height, int tileCountX, int tileCountY, bool horizontal)
     {

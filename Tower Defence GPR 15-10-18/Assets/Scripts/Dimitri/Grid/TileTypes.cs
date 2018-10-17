@@ -1,0 +1,1 @@
+﻿public enum TileTypes { Blocked, Available, Path, Water, Spawn}
