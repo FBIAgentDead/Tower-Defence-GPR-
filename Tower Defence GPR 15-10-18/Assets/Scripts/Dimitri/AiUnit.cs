@@ -9,14 +9,16 @@ public class AiUnit : MonoBehaviour {
     int unitHealth { get { return unitHealth; } set { unitHealth = unitHealth; } }
     private int unitDamage;
     private float unitSpeed;
+    private Vector2 spawnlocation;
     
     //constructor
-    public AiUnit(string unitName, int health, int damage, float speed = 1)
+    public AiUnit(string unitName,Vector2 spawn, int health, int damage, float speed = 1)
     {
         name = unitName;
         unitHealth = health;
         unitDamage = damage;
         unitSpeed = speed;
+        spawnlocation = spawn;
         GetGameObject();
     }
 
@@ -24,6 +26,7 @@ public class AiUnit : MonoBehaviour {
     private void GetGameObject()
     {
         unit = GameObject.FindGameObjectWithTag(name);
+        Instantiate(unit, spawnlocation, Quaternion.identity);
     }
 
 }

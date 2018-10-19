@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class GridScript{
 
-    [SerializeField]
     public Tile[,] tiles;
+    [SerializeField]
     private float gridHeight;
+    [SerializeField]
     private float gridWidth;
-    private int tileAmountX;
-    private int tileAmountY;
+    [SerializeField]
+    private float tileAmountX;
+    [SerializeField]
+    private float tileAmountY;
+    [SerializeField]
     private float gridPositionX;
+    [SerializeField]
     private float gridPositionY;
     
     //constructor getting variables
-    public GridScript(float width, float height, int tileCountX, int tileCountY,float startPositionX = 0, float startPositionY = 0)
+    public GridScript(float width, float height, float startPositionX = 0, float startPositionY = 0)
     {
         gridHeight = height;
         gridWidth = width;
-        tileAmountX = tileCountX;
+        tileAmountX = gridWidth;
+        tileAmountY = gridHeight;
         gridPositionX = startPositionX;
         gridPositionY = startPositionY;
-        tileAmountY = tileCountY;
         tiles = new Tile[Mathf.FloorToInt(height/tileSizeY), Mathf.FloorToInt(width/tileSizeX)];
         CreateGrid();
     }
-
+    
     //get the grid position
     public Vector2 position { get { return new Vector2(gridPositionX,gridPositionY); } }
 
@@ -39,25 +44,25 @@ public class GridScript{
     
     //get the tile based on vector2 position and yes we know this is a weird and big way to do 
     //it but we couldn't find it on google sowwy :(
-    public Tile GetTile(Vector2 position)
+    public Tile GetTile(Vector2 position, int parentX = 0, int parentY = 0)
     {
         if(position.x < 0 && position.y < 0){
-            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)*-1), Mathf.RoundToInt((position.x / tileSizeX) * -1)];
+            Tile currentTile = tiles[Mathf.RoundToInt(((position.y/tileSizeY)*-1)+parentY),Mathf.RoundToInt(((position.x/tileSizeX)*-1)+parentX)];
             return currentTile;
         }
         else if(position.y < 0)
         {
-            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)*-1), Mathf.RoundToInt((position.x / tileSizeX))];
+            Tile currentTile = tiles[Mathf.RoundToInt(((position.y/tileSizeY)*-1)+parentY),Mathf.RoundToInt((position.x/tileSizeX)+parentX)];
             return currentTile;
         }
         else if(position.x < 0)
         {
-            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)), Mathf.RoundToInt((position.x / tileSizeX)*-1)];
+            Tile currentTile = tiles[Mathf.RoundToInt((position.y/tileSizeY)+parentY),Mathf.RoundToInt(((position.x/tileSizeX)*-1)+parentX)];
             return currentTile;
         }
         else
         {
-            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)), Mathf.RoundToInt((position.x / tileSizeX))];
+            Tile currentTile = tiles[Mathf.RoundToInt((position.y/tileSizeY)+parentY),Mathf.RoundToInt((position.x/tileSizeX)+parentX)];
             return currentTile;
         }
     }
@@ -94,4 +99,21 @@ public class GridScript{
         }
     }
 
+    public int GetDistance(Tile start, Tile finish)
+    {
+        int aX;
+        int aY;
+        int bX;
+        int bY;
+
+        int distance;
+
+        aX = Mathf.RoundToInt(start.position.x);
+        aY = Mathf.RoundToInt((start.position.y)*-1);
+        bX = Mathf.RoundToInt(finish.position.x);
+        bY = Mathf.RoundToInt((finish.position.y)*-1);
+
+        distance = (aX + bX) + (aY + bY);
+        return distance;
+    }
 }

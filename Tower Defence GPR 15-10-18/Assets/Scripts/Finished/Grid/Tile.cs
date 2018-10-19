@@ -20,7 +20,7 @@ public class Tile{
     public TileTypes getTile { set { tile = value;  } get { return tile; } }
     
     //this will show the tile and pls don't let me explain the formula
-    public void DrawTile(float width, float height, int tileCountX, int tileCountY, bool horizontal)
+    public void DrawTile(float width, float height, float tileCountX, float tileCountY, bool horizontal)
     {
         if(horizontal == true)
         Debug.DrawLine(new Vector2(positionX + (width/tileCountX)/2,positionY + (height/tileCountY)/2), new Vector2(positionX + (width / tileCountX)/2,positionY - height), Color.black, Mathf.Infinity);
