@@ -10,17 +10,24 @@ public class GridScript{
     private float gridWidth;
     private int tileAmountX;
     private int tileAmountY;
-
+    private float gridPositionX;
+    private float gridPositionY;
+    
     //constructor getting variables
-    public GridScript(float width, float height, int tileCountX, int tileCountY)
+    public GridScript(float width, float height, int tileCountX, int tileCountY,float startPositionX = 0, float startPositionY = 0)
     {
         gridHeight = height;
         gridWidth = width;
         tileAmountX = tileCountX;
+        gridPositionX = startPositionX;
+        gridPositionY = startPositionY;
         tileAmountY = tileCountY;
         tiles = new Tile[Mathf.FloorToInt(height/tileSizeY), Mathf.FloorToInt(width/tileSizeX)];
         CreateGrid();
     }
+
+    //get the grid position
+    public Vector2 position { get { return new Vector2(gridPositionX,gridPositionY); } }
 
     //these getters can be used to get size for each tile every tile has the same x size and y size
     public float tileSizeX { get { return gridWidth / tileAmountX; } }
@@ -29,35 +36,46 @@ public class GridScript{
     //it gets the array lenght x or y so you can check what the array lenght is
     public float lenghtY { get { return tileAmountY; } }
     public float lenghtX { get { return tileAmountX; } }
-
-    public int GetTileX(float x)
+    
+    //get the tile based on vector2 position and yes we know this is a weird and big way to do 
+    //it but we couldn't find it on google sowwy :(
+    public Tile GetTile(Vector2 position)
     {
-        Debug.Log(Mathf.FloorToInt(x / tileSizeX));
-        return Mathf.FloorToInt(x / tileSizeX);
-    }
-
-    public int GetTileY(float y)
-    {
-        Debug.Log(Mathf.FloorToInt(y / tileSizeY));
-        return Mathf.FloorToInt(y / tileSizeY);
+        if(position.x < 0 && position.y < 0){
+            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)*-1), Mathf.RoundToInt((position.x / tileSizeX) * -1)];
+            return currentTile;
+        }
+        else if(position.y < 0)
+        {
+            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)*-1), Mathf.RoundToInt((position.x / tileSizeX))];
+            return currentTile;
+        }
+        else if(position.x < 0)
+        {
+            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)), Mathf.RoundToInt((position.x / tileSizeX)*-1)];
+            return currentTile;
+        }
+        else
+        {
+            Tile currentTile = tiles[Mathf.RoundToInt((position.y / tileSizeY)), Mathf.RoundToInt((position.x / tileSizeX))];
+            return currentTile;
+        }
     }
 
     //creates a new grid with length and height pretty cool right?
     public void CreateGrid()
     {
-        float tempX = 0;
-        float tempY = 0;
+        float tempX = gridPositionX;
+        float tempY = gridPositionY;
         int yLayer = 0;
-        int timesDone = 0;
         for (int k = 0; k < (gridHeight/tileSizeY) - 1; k++)
         {
-            timesDone++;
             for (int i = 0; i < (gridWidth/tileSizeX) - 1; i++)
             {
                 tiles[yLayer, i] = new Tile(tempX, tempY, TileTypes.Available);
                 tempX += tileSizeX;
             }
-            tempX = 0;
+            tempX = gridPositionX;
             yLayer++;
             tempY -= tileSizeY;
         }

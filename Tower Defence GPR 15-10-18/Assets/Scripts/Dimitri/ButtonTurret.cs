@@ -9,11 +9,13 @@ public class ButtonTurret : MonoBehaviour {
     [SerializeField]
     GameObject floor;
     GridScript grid;
-    private int position = 0;
-
+    [SerializeField]
+    Transform test;
     public void onClick()
     {
         grid = new GridScript(37, 17, 37, 17);
         grid.DrawGrid();
+        Debug.Log(grid.GetTile(new Vector2(test.position.x,test.position.y)));
     }
+    
 }
