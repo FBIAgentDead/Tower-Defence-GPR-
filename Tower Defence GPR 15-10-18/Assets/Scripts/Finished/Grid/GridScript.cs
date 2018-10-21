@@ -6,37 +6,37 @@ public class GridScript{
 
     public Tile[,] tiles;
     [SerializeField]
-    private float gridHeight;
+    private float gridManagerHeight;
     [SerializeField]
-    private float gridWidth;
+    private float gridManagerWidth;
     [SerializeField]
     private float tileAmountX;
     [SerializeField]
     private float tileAmountY;
     [SerializeField]
-    private float gridPositionX;
+    private float gridManagerPositionX;
     [SerializeField]
-    private float gridPositionY;
+    private float gridManagerPositionY;
     
     //constructor getting variables
     public GridScript(float width, float height, float startPositionX = 0, float startPositionY = 0)
     {
-        gridHeight = height;
-        gridWidth = width;
-        tileAmountX = gridWidth;
-        tileAmountY = gridHeight;
-        gridPositionX = startPositionX;
-        gridPositionY = startPositionY;
+        gridManagerHeight = height;
+        gridManagerWidth = width;
+        tileAmountX = gridManagerWidth;
+        tileAmountY = gridManagerHeight;
+        gridManagerPositionX = startPositionX;
+        gridManagerPositionY = startPositionY;
         tiles = new Tile[Mathf.FloorToInt(height/tileSizeY), Mathf.FloorToInt(width/tileSizeX)];
         CreateGrid();
     }
     
-    //get the grid position
-    public Vector2 position { get { return new Vector2(gridPositionX,gridPositionY); } }
+    //get the gridManager position
+    public Vector2 position { get { return new Vector2(gridManagerPositionX,gridManagerPositionY); } }
 
     //these getters can be used to get size for each tile every tile has the same x size and y size
-    public float tileSizeX { get { return gridWidth / tileAmountX; } }
-    public float tileSizeY { get { return gridHeight / tileAmountY; } }
+    public float tileSizeX { get { return gridManagerWidth / tileAmountX; } }
+    public float tileSizeY { get { return gridManagerHeight / tileAmountY; } }
 
     //it gets the array lenght x or y so you can check what the array lenght is
     public float lenghtY { get { return tileAmountY; } }
@@ -67,53 +67,36 @@ public class GridScript{
         }
     }
 
-    //creates a new grid with length and height pretty cool right?
+    //creates a new gridManager with length and height pretty cool right?
     public void CreateGrid()
     {
-        float tempX = gridPositionX;
-        float tempY = gridPositionY;
+        float tempX = gridManagerPositionX;
+        float tempY = gridManagerPositionY;
         int yLayer = 0;
-        for (int k = 0; k < (gridHeight/tileSizeY) - 1; k++)
+        for (int k = 0; k < (gridManagerHeight/tileSizeY) - 1; k++)
         {
-            for (int i = 0; i < (gridWidth/tileSizeX) - 1; i++)
+            for (int i = 0; i < (gridManagerWidth/tileSizeX) - 1; i++)
             {
-                tiles[yLayer, i] = new Tile(tempX, tempY, TileTypes.Available);
+                tiles[yLayer, i] = new Tile(tempX, tempY, TileTypes.None);
                 tempX += tileSizeX;
             }
-            tempX = gridPositionX;
+            tempX = gridManagerPositionX;
             yLayer++;
             tempY -= tileSizeY;
         }
     }
 
-    //draws grid visual with the use of unity debug.drawline only rendered in the editor for easy use
+    //draws gridManager visual with the use of unity debug.drawline only rendered in the editor for easy use
     public void DrawGrid()
     {
-        for (int i = 0; i < (gridWidth/tileSizeX) - 1; i++)
+        for (int i = 0; i < (gridManagerWidth/tileSizeX) - 1; i++)
         {
-            tiles[0, i].DrawTile(gridWidth, gridHeight, tileAmountX, tileAmountY, true);
+            tiles[0, i].DrawTile(gridManagerWidth, gridManagerHeight, tileAmountX, tileAmountY, true);
         }
-        for(int i = 0; i < (gridHeight/tileSizeY) - 1; i++)
+        for(int i = 0; i < (gridManagerHeight/tileSizeY) - 1; i++)
         {
-            tiles[i, 0].DrawTile(gridWidth, gridHeight, tileAmountX, tileAmountY, false);
+            tiles[i, 0].DrawTile(gridManagerWidth, gridManagerHeight, tileAmountX, tileAmountY, false);
         }
     }
 
-    public int GetDistance(Tile start, Tile finish)
-    {
-        int aX;
-        int aY;
-        int bX;
-        int bY;
-
-        int distance;
-
-        aX = Mathf.RoundToInt(start.position.x);
-        aY = Mathf.RoundToInt((start.position.y)*-1);
-        bX = Mathf.RoundToInt(finish.position.x);
-        bY = Mathf.RoundToInt((finish.position.y)*-1);
-
-        distance = (aX + bX) + (aY + bY);
-        return distance;
-    }
 }

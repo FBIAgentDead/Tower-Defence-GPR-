@@ -16,8 +16,8 @@ public class Tile{
     }
 
     //returns current tile position with the use of vectors
-    public Vector2 position { get { return new Vector2(positionX,positionY); } }
-    public TileTypes getTile { set { tile = value;  } get { return tile; } }
+    public Vector3 position { get { return new Vector3(positionX,positionY, 1); } }
+    public TileTypes getTileType { set { tile = value;  } get { return tile; } }
     
     //this will show the tile and pls don't let me explain the formula
     public void DrawTile(float width, float height, float tileCountX, float tileCountY, bool horizontal)
@@ -26,6 +26,25 @@ public class Tile{
         Debug.DrawLine(new Vector2(positionX + (width/tileCountX)/2,positionY + (height/tileCountY)/2), new Vector2(positionX + (width / tileCountX)/2,positionY - height), Color.black, Mathf.Infinity);
         else
         Debug.DrawLine(new Vector2(positionX - (width/tileCountX)/2,positionY - (height/tileCountY)/2), new Vector2(positionX + width, positionY - (height / tileCountY)/2), Color.black, Mathf.Infinity);
+    }
+
+    //gets distance between tile a and tile b
+    public int GetDistance(Tile b)
+    {
+        int aX;
+        int aY;
+        int bX;
+        int bY;
+
+        int distance;
+
+        aX = Mathf.RoundToInt(positionX);
+        aY = Mathf.RoundToInt(positionY*-1);
+        bX = Mathf.RoundToInt(b.position.x);
+        bY = Mathf.RoundToInt(b.position.y*-1);
+
+        distance = (aX + bX) + (aY + bY);
+        return distance;
     }
 
 }

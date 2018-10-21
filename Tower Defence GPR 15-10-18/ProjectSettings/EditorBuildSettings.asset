@@ -4,4 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Dimitri.unity
+    guid: 64a618de1c5f58b43a718e792cfafd5e
+  - enabled: 1
+    path: Assets/Scenes/Store.unity
+    guid: ecdbd91e336594d45b8104d861105e8d
+  m_configObjects: {}
