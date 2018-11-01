@@ -53,18 +53,16 @@ public class AiUnit : MonoBehaviour {
 
         //gets all the parent Tiles not 8 but 4 cause you can't go diognal in the game
         if(grid.mainGrid.GetTile(unit.transform.position, 1).getTileType == TileTypes.Path)
-            open.Add("rightParent",grid.mainGrid.GetTile(unit.transform.position, 1));
+            open.Add("rightNeighbour",grid.mainGrid.GetTile(unit.transform.position, 1));
         if (grid.mainGrid.GetTile(unit.transform.position, -1).getTileType == TileTypes.Path)
-            open.Add("leftParent",grid.mainGrid.GetTile(unit.transform.position, -1));
+            open.Add("leftNeighbour",grid.mainGrid.GetTile(unit.transform.position, -1));
         if (grid.mainGrid.GetTile(unit.transform.position, 0, 1).getTileType == TileTypes.Path)
-            open.Add("upParent",grid.mainGrid.GetTile(unit.transform.position, 0, 1));
+            open.Add("upNeighbour",grid.mainGrid.GetTile(unit.transform.position, 0, 1));
         if (grid.mainGrid.GetTile(unit.transform.position, 0, -1).getTileType == TileTypes.Path)
-            open.Add("downParent",grid.mainGrid.GetTile(unit.transform.position, 0, -1));
+            open.Add("downNeighbour",grid.mainGrid.GetTile(unit.transform.position, 0, -1));
 
         //for each tile in open its going to check wich one has the best values and then move towards that one
-        foreach(KeyValuePair<string, Tile> tile in open){
-
-        }
+        //to be continued...
     }
 
     

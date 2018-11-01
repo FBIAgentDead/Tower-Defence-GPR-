@@ -5,6 +5,8 @@ using UnityEngine;
 public class MouseInput : MonoBehaviour {
 
 	GridMaster tileLocation;
+	[SerializeField]
+	GameObject parentUnits;
 
 	void Awake()
 	{
@@ -17,9 +19,12 @@ public class MouseInput : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)){
 			GameObject building;
 			if(tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType == TileTypes.BuildBlock){
-				building = GameObject.Find(PlayerPrefs.GetString("choice"));
+				Debug.Log(PlayerPrefs.GetString("choice"));
+				building = Resources.Load("Towers/"+PlayerPrefs.GetString("choice")) as GameObject;
                 tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType = TileTypes.Building;
-				Instantiate(building,tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).position, Quaternion.identity);
+				GameObject clone = Instantiate(building,tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).position, Quaternion.identity);
+				clone.transform.parent = parentUnits.transform;
+                tileLocation.mainGrid.GetTile(clone.transform.position).UnitObject = clone;
 			}
 		}
 	}		

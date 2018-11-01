@@ -46,25 +46,26 @@ public class GridScript{
     //it but we couldn't find it on google sowwy :(
     public Tile GetTile(Vector2 position, int parentX = 0, int parentY = 0)
     {
-        if(position.x < 0 && position.y < 0){
-            Tile currentTile = tiles[Mathf.RoundToInt(((position.y/tileSizeY)*-1)+parentY),Mathf.RoundToInt(((position.x/tileSizeX)*-1)+parentX)];
-            return currentTile;
-        }
-        else if(position.y < 0)
-        {
-            Tile currentTile = tiles[Mathf.RoundToInt(((position.y/tileSizeY)*-1)+parentY),Mathf.RoundToInt((position.x/tileSizeX)+parentX)];
-            return currentTile;
-        }
-        else if(position.x < 0)
-        {
-            Tile currentTile = tiles[Mathf.RoundToInt((position.y/tileSizeY)+parentY),Mathf.RoundToInt(((position.x/tileSizeX)*-1)+parentX)];
-            return currentTile;
-        }
-        else
-        {
-            Tile currentTile = tiles[Mathf.RoundToInt((position.y/tileSizeY)+parentY),Mathf.RoundToInt((position.x/tileSizeX)+parentX)];
-            return currentTile;
-        }
+            if(position.x < 0 && position.y < 0){
+                Tile currentTile = tiles[Mathf.RoundToInt(((position.y/tileSizeY)*-1)+parentY),Mathf.RoundToInt(((position.x/tileSizeX)*-1)+parentX)];
+                return currentTile;
+            }
+            else if(position.y < 0)
+            {
+                Tile currentTile = tiles[Mathf.RoundToInt(((position.y/tileSizeY)*-1)+parentY),Mathf.RoundToInt((position.x/tileSizeX)+parentX)];
+                return currentTile;
+            }
+            else if(position.x < 0)
+            {
+                Tile currentTile = tiles[Mathf.RoundToInt((position.y/tileSizeY)+parentY),Mathf.RoundToInt(((position.x/tileSizeX)*-1)+parentX)];
+                return currentTile;
+            }
+            else
+            {
+                Tile currentTile = tiles[Mathf.RoundToInt((position.y/tileSizeY)+parentY),Mathf.RoundToInt((position.x/tileSizeX)+parentX)];
+                return currentTile;
+            }
+        
     }
 
     //creates a new gridManager with length and height pretty cool right?
