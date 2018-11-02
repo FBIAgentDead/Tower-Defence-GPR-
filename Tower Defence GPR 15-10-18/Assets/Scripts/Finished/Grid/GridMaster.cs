@@ -38,6 +38,7 @@ public class GridMaster : MonoBehaviour {
 	void GameObjectPosition(){
 		for(int i = 0; i < gridObjects.Length; i++){
 			if(gridObjects[i] != null || mainGrid.GetTile(gridObjects[i].transform.position) != null){
+				TileCleaner();
 				gridObjects[i].transform.position = mainGrid.GetTile(gridObjects[i].transform.position).position;
 				gridObjects[i].transform.parent = parentHost.transform;
 				ObjectTypes currentType = gridObjects[i].GetComponent<ObjectTypes>();
@@ -45,6 +46,20 @@ public class GridMaster : MonoBehaviour {
 				mainGrid.GetTile(gridObjects[i].transform.position).getTileType = currentType.getTileType;
 			}
 			
+		}
+	}
+
+	//if multiple tiles are on the same position it wil destroy the second one
+	private void TileCleaner(){
+		for(int i = 0; i < gridObjects.Length; i++){
+			int temp = (i + 1);
+			while(temp != gridObjects.Length){
+				if(gridObjects[i].transform.position == gridObjects[temp].transform.position){
+					DestroyImmediate(gridObjects[temp]);
+					Debug.Log("Cleaned something!");
+				}
+				temp ++;
+			}
 		}
 	}
 
