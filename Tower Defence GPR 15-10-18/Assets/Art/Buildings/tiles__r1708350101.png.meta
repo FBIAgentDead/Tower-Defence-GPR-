@@ -10,6 +10,7 @@ TextureImporter:
     21300010: tiles__r1708350101_5
     21300012: tiles__r1708350101_6
     21300014: tiles__r1708350101_7
+    21300016: tiles__r1708350101_8
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -262,13 +263,33 @@ TextureImporter:
         width: 35
         height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: faebad28dcfe4a54f8c7704406c49092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tiles__r1708350101_8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 201
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 0, z: 1, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a36c5ca6762756b4a920a121091a8fa6
       vertices: []
       indices: 
       edges: []
