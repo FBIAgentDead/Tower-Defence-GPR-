@@ -50,7 +50,7 @@ public class GridMaster : MonoBehaviour {
 	}
 
 	//if multiple tiles are on the same position it wil destroy the second one
-	private void TileCleaner(){
+	public void TileCleaner(){
 		for(int i = 0; i < gridObjects.Length; i++){
 			int temp = (i + 1);
 			while(temp != gridObjects.Length){
