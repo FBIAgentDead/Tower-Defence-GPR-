@@ -25,6 +25,10 @@ public class GridMaster : MonoBehaviour {
 	{
         mainGrid = new GridScript(gridManagerWidth, gridManagerHeight, X, Y);
 		mainGrid.DrawGrid();
+        gridObjects = GameObject.FindGameObjectsWithTag(gridObjectsTag);
+        GameObjectPosition();
+        TileCleaner();
+        Debug.Log("oof");
 	}
 	
 	void Update()
