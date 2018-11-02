@@ -4,34 +4,26 @@ using UnityEngine;
 
 public class AiUnit : MonoBehaviour {
 
-    GameObject unitPrefab;
+    [SerializeField]
     GameObject unit;
     private string name;
+    [SerializeField]
     private int unitHealth;
+    [SerializeField]
     private int unitDamage;
+    [SerializeField]
     private float unitSpeed;
     private Vector2 spawnlocation;
-    
-    //constructor
-    public AiUnit(string unitName,Vector2 spawn, int health, int damage, float speed = 1)
+    [SerializeField]
+    private Transform[] pathStrait;
+
+    void Awake()
     {
-        name = unitName;
-        unitHealth = health;
-        unitDamage = damage;
-        unitSpeed = speed;
-        spawnlocation = spawn;
-        GetGameObject();
+        StartCoroutine("PathMovement");
     }
 
 
     public int getHealth { set { getHealth = value; } get { return unitHealth; } }
-
-    //gets the gameobject by tag with the given name and instantiate on given spawn
-    private void GetGameObject()
-    {
-        unitPrefab = GameObject.FindGameObjectWithTag(name);
-        unit = Instantiate(unitPrefab, spawnlocation, Quaternion.identity);
-    }
     public Vector2 position { get {return unit.transform.position; } }
 
     //AI movement with the algorithm A*
@@ -60,20 +52,28 @@ public class AiUnit : MonoBehaviour {
             open.Add("upNeighbour",grid.mainGrid.GetTile(unit.transform.position, 0, 1));
         if (grid.mainGrid.GetTile(unit.transform.position, 0, -1).getTileType == TileTypes.Path)
             open.Add("downNeighbour",grid.mainGrid.GetTile(unit.transform.position, 0, -1));
-
-        //for each tile in open its going to check wich one has the best values and then move towards that one
         //to be continued...
     }
 
-    
-    //lerp from tile a to tile b with the use of unitSpeed giving in constructor
-    private IEnumerator MoveTo(Tile b){
-        float t = 0;
-        while(t < 1){
-            Debug.Log("moving");
-            unit.transform.position = Vector2.Lerp(unit.transform.position, b.position, t);
-            t += unitSpeed/10;
-            yield return new WaitForSeconds(0.1f);
+    //gets the next tile for the waypoint system
+    private int NextTile(int index, Transform[] lenght){
+        if(index == lenght.Length)
+        return index;
+        else
+        return (index+1);
+    }
+
+    //waypoint system moves from tile to tile pretty ez right?
+    IEnumerator PathMovement(){
+        for(int i = 0; i < pathStrait.Length; i++){
+            float temp = 0;
+            if(unit.transform.position != pathStrait[pathStrait.Length - 1].position){
+                while(unit.transform.position != pathStrait[NextTile(i, pathStrait)].position){
+                    unit.transform.position = Vector3.Lerp(unit.transform.position, pathStrait[NextTile(i, pathStrait)].position, temp);
+                    temp += (unitSpeed/10);
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
         }
     }
 
