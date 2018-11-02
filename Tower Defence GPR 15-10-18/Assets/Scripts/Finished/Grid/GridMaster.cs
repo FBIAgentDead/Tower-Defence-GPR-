@@ -31,6 +31,7 @@ public class GridMaster : MonoBehaviour {
 	{
 		gridObjects = GameObject.FindGameObjectsWithTag(gridObjectsTag);
 		GameObjectPosition();
+        TileCleaner();
 	}
 
 	//this wil make building a map easier because it wil center building blocks to tiles even outside play mode
@@ -38,7 +39,6 @@ public class GridMaster : MonoBehaviour {
 	void GameObjectPosition(){
 		for(int i = 0; i < gridObjects.Length; i++){
 			if(gridObjects[i] != null || mainGrid.GetTile(gridObjects[i].transform.position) != null){
-                TileCleaner();
 				gridObjects[i].transform.position = mainGrid.GetTile(gridObjects[i].transform.position).position;
 				gridObjects[i].transform.parent = parentHost.transform;
 				ObjectTypes currentType = gridObjects[i].GetComponent<ObjectTypes>();
