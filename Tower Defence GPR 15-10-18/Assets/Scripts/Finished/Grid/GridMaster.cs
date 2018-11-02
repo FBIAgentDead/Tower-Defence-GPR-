@@ -38,7 +38,7 @@ public class GridMaster : MonoBehaviour {
 	void GameObjectPosition(){
 		for(int i = 0; i < gridObjects.Length; i++){
 			if(gridObjects[i] != null || mainGrid.GetTile(gridObjects[i].transform.position) != null){
-				TileCleaner();
+				// TileCleaner();
 				gridObjects[i].transform.position = mainGrid.GetTile(gridObjects[i].transform.position).position;
 				gridObjects[i].transform.parent = parentHost.transform;
 				ObjectTypes currentType = gridObjects[i].GetComponent<ObjectTypes>();
