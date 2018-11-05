@@ -28,7 +28,6 @@ public class GridMaster : MonoBehaviour {
         gridObjects = GameObject.FindGameObjectsWithTag(gridObjectsTag);
         GameObjectPosition();
         TileCleaner();
-        Debug.Log("oof");
 	}
 	
 	void Update()
@@ -37,7 +36,6 @@ public class GridMaster : MonoBehaviour {
 			gridObjects = GameObject.FindGameObjectsWithTag(gridObjectsTag);
 			GameObjectPosition();
         	TileCleaner();
-			Debug.Log("oof");
 		}
 	}
 

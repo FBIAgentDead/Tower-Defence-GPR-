@@ -3,35 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
-
-	private int detectRange = 4;
+	
+	[SerializeField]
+	private int detectRange = 3;
+	[SerializeField]
 	private int towerDamage;
+	[SerializeField]
 	private int attackSpeed;
 	private GridMaster getTiles;
 	private GameObject currentTarget;
 	private Transform thisTower;
-	private List<Tile> tilesInRange;
+	[SerializeField]
+	GameObject building;
+	private List<Tile> tilesInRange = new List<Tile>();
 
-	void Update()
+	void Awake()
 	{
-		tilesInRange = new List<Tile>();
-		thisTower = gameObject.GetComponent<Transform>();
 		getTiles = GameObject.Find("Grid").GetComponent<GridMaster>();
-		float startX = thisTower.position.x - (detectRange/2);
-		float startY = thisTower.position.y + (detectRange/2);
-		int times = 0;
-		for(int i = 0; i < detectRange; i++){
-			for(int j = 0; j < detectRange; j++){
-                tilesInRange.Add(getTiles.mainGrid.GetTile(new Vector2(startX,startY)));
-				startX += 1;
-				times++;
+		thisTower = gameObject.GetComponent<Transform>();
+        GetTilesInRange();
+	}
+
+	//this function wil get all the tiles in range with the given range
+	private void GetTilesInRange(){
+		int startX =- detectRange;
+		int startY =- detectRange;
+		for(int i = 0; i < (detectRange*2)+1; i++){
+			for(int j = 0; j < (detectRange*2)+1; j++){
+				tilesInRange.Add(getTiles.mainGrid.GetTile(thisTower.position, startX, startY));
+				startX++;
 			}
-			startY -= 1;
-			startX -= 1;
+			startY = (startY + 1);
+			startX =- detectRange;
 		}
-		for(int f = 0; f < tilesInRange.Count; f++)
-		Debug.Log(tilesInRange[f].position);
-        Debug.Log(times);
 	}
 	
 }

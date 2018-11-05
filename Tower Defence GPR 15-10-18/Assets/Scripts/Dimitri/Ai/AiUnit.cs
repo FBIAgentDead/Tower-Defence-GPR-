@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum Directions {Left, Right, Up, Down}
 public class AiUnit : MonoBehaviour {
 
     [SerializeField]
     GameObject unit;
-    private string name;
     [SerializeField]
     private int unitHealth;
     [SerializeField]
     private int unitDamage;
     [SerializeField]
     private float unitSpeed;
-    private Vector2 spawnlocation;
     [SerializeField]
-    private Transform[] pathStrait;
-
+    private Directions[] directions;
+    [SerializeField]
+    GridMaster tiles;
     void Awake()
     {
         StartCoroutine("PathMovement");
@@ -54,25 +54,33 @@ public class AiUnit : MonoBehaviour {
             open.Add("downNeighbour",grid.mainGrid.GetTile(unit.transform.position, 0, -1));
         //to be continued...
     }
-
-    //gets the next tile for the waypoint system
-    private int NextTile(int index, Transform[] lenght){
-        if(index == lenght.Length)
-        return index;
-        else
-        return (index+1);
-    }
-
-    //waypoint system moves from tile to tile pretty ez right?
-    IEnumerator PathMovement(){
-        for(int i = 0; i < pathStrait.Length; i++){
+    
+    //using a enum to move left up down right
+    IEnumerator PathMovement()
+    {
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Tile moveTo;
             float temp = 0;
-            if(unit.transform.position != pathStrait[pathStrait.Length - 1].position){
-                while(unit.transform.position != pathStrait[NextTile(i, pathStrait)].position){
-                    unit.transform.position = Vector3.Lerp(unit.transform.position, pathStrait[NextTile(i, pathStrait)].position, temp);
-                    temp += (unitSpeed/10);
-                    yield return new WaitForSeconds(0.1f);
-                }
+            if(directions[i] == Directions.Left){
+                moveTo = tiles.mainGrid.GetTile(unit.transform.position, -1);
+            }
+            else if (directions[i] == Directions.Right)
+            {
+                moveTo = tiles.mainGrid.GetTile(unit.transform.position, 1);
+            }
+            else if (directions[i] == Directions.Up)
+            {
+                moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, -1);
+            }
+            else
+            {
+                moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, 1);
+            }
+            while(unit.transform.position != moveTo.position){
+                unit.transform.position = Vector3.Lerp(unit.transform.position, moveTo.position, temp);
+                temp += (unitSpeed / 10);
+                yield return new WaitForSeconds(0.1f);
             }
         }
     }
