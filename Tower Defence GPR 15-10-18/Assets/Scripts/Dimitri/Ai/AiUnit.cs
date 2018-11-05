@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Directions {Left, Right, Up, Down}
+public enum Directions {Left, Right, Up, Down}
 public class AiUnit : MonoBehaviour {
 
     [SerializeField]
@@ -13,12 +13,12 @@ public class AiUnit : MonoBehaviour {
     private int unitDamage;
     [SerializeField]
     private float unitSpeed;
-    [SerializeField]
-    private Directions[] directions;
+    public Directions[] path;
     [SerializeField]
     GridMaster tiles;
     void Awake()
     {
+        tiles = GameObject.Find("Grid").GetComponent<GridMaster>();
         StartCoroutine("PathMovement");
     }
 
@@ -58,18 +58,18 @@ public class AiUnit : MonoBehaviour {
     //using a enum to move left up down right
     IEnumerator PathMovement()
     {
-        for (int i = 0; i < directions.Length; i++)
+        for (int i = 0; i < path.Length; i++)
         {
             Tile moveTo;
             float temp = 0;
-            if(directions[i] == Directions.Left){
+            if(path[i] == Directions.Left){
                 moveTo = tiles.mainGrid.GetTile(unit.transform.position, -1);
             }
-            else if (directions[i] == Directions.Right)
+            else if (path[i] == Directions.Right)
             {
                 moveTo = tiles.mainGrid.GetTile(unit.transform.position, 1);
             }
-            else if (directions[i] == Directions.Up)
+            else if (path[i] == Directions.Up)
             {
                 moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, -1);
             }
