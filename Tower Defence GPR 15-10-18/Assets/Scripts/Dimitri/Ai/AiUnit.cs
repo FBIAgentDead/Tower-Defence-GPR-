@@ -77,10 +77,13 @@ public class AiUnit : MonoBehaviour {
             {
                 moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, 1);
             }
-            while(unit.transform.position != moveTo.position){
-                unit.transform.position = Vector3.Lerp(unit.transform.position, moveTo.position, temp);
-                temp += (unitSpeed / 10);
-                yield return new WaitForSeconds(0.1f);
+
+            if(moveTo.getTileType == TileTypes.Path){
+                while(unit.transform.position != moveTo.position){
+                    unit.transform.position = Vector3.Lerp(unit.transform.position, moveTo.position, temp);
+                    temp += (unitSpeed / 10);
+                    yield return new WaitForSeconds(0.1f);
+                }
             }
         }
     }

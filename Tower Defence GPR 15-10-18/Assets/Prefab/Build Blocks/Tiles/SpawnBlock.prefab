@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4765346456416904}
   - component: {fileID: 212482204366247958}
   - component: {fileID: 114624828660827092}
+  - component: {fileID: 114547290510554620}
   m_Layer: 0
   m_Name: SpawnBlock
   m_TagString: GridObject
@@ -41,6 +42,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114547290510554620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1777731659672364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1588a9bfad7a6e24087650b175311bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPath: 
+  enemies: []
+  respawnTime: 0
+  parentEnemies: {fileID: 0}
 --- !u!114 &114624828660827092
 MonoBehaviour:
   m_ObjectHideFlags: 1

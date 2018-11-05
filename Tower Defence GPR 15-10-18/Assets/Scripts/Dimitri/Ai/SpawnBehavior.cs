@@ -9,6 +9,10 @@ public class SpawnBehavior : MonoBehaviour {
 	[SerializeField]
 	GameObject[] enemies;
 	private AiUnit setPath;
+	[SerializeField]
+	private float respawnTime;
+	[SerializeField]
+	GameObject parentEnemies;
 
 	void Start()
 	{
@@ -17,10 +21,13 @@ public class SpawnBehavior : MonoBehaviour {
 
 	IEnumerator spawnEnemies()
 	{
-		GameObject currentEnemie = enemies[Random.Range(0, enemies.Length)];
-		setPath = currentEnemie.GetComponent<AiUnit>();
-		setPath.path = spawnPath;
-		Instantiate(currentEnemie, transform.position, Quaternion.identity);
-		yield return null;
+		while(true){
+			GameObject currentEnemie = enemies[Random.Range(0, enemies.Length)];
+			setPath = currentEnemie.GetComponent<AiUnit>();
+			setPath.path = spawnPath;
+			GameObject enenmieClone = Instantiate(currentEnemie, transform.position, Quaternion.identity);
+            enenmieClone.transform.SetParent(parentEnemies.transform);
+			yield return new WaitForSeconds(respawnTime);
+		}
 	}
 }
