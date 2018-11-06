@@ -18,8 +18,7 @@ public class MouseInput : MonoBehaviour {
 	{
 		if(Input.GetMouseButtonDown(0)){
 			GameObject building;
-			string checkIfObject = PlayerPrefs.GetString("Choice", null);
-			if(tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType == TileTypes.BuildBlock && checkIfObject != null){
+			if(tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType == TileTypes.BuildBlock && PlayerPrefs.GetString("choice", null) != null){
 				Debug.Log(PlayerPrefs.GetString("choice"));
 				building = Resources.Load("Towers/"+PlayerPrefs.GetString("choice")) as GameObject;
                 tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType = TileTypes.Building;
