@@ -60,29 +60,30 @@ public class AiUnit : MonoBehaviour {
     {
         for (int i = 0; i < path.Length; i++)
         {
-            Tile moveTo;
-            float temp = 0;
-            if(path[i] == Directions.Left){
-                moveTo = tiles.mainGrid.GetTile(unit.transform.position, -1);
-            }
-            else if (path[i] == Directions.Right)
-            {
-                moveTo = tiles.mainGrid.GetTile(unit.transform.position, 1);
-            }
-            else if (path[i] == Directions.Up)
-            {
-                moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, -1);
-            }
-            else
-            {
-                moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, 1);
-            }
-
-            if(moveTo.getTileType == TileTypes.Path){
-                while(unit.transform.position != moveTo.position){
-                    unit.transform.position = Vector3.Lerp(unit.transform.position, moveTo.position, temp);
-                    temp += (unitSpeed / 10);
-                    yield return new WaitForSeconds(0.1f);
+            Tile moveTo = tiles.mainGrid.GetTile(unit.transform.position);
+            while(moveTo.getTileType == TileTypes.Path || moveTo.getTileType == TileTypes.EnemySpawn){
+                float temp = 0;
+                if(path[i] == Directions.Left){
+                    moveTo = tiles.mainGrid.GetTile(unit.transform.position, -1);
+                }
+                else if (path[i] == Directions.Right)
+                {
+                    moveTo = tiles.mainGrid.GetTile(unit.transform.position, 1);
+                }
+                else if (path[i] == Directions.Up)
+                {
+                    moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, -1);
+                }
+                else
+                {
+                    moveTo = tiles.mainGrid.GetTile(unit.transform.position, 0, 1);
+                }
+                if(moveTo.getTileType == TileTypes.Path){
+                    while(unit.transform.position != moveTo.position){
+                        unit.transform.position = Vector3.Lerp(unit.transform.position, moveTo.position, temp);
+                        temp += (unitSpeed / 10);
+                        yield return new WaitForSeconds(0.1f);
+                    }
                 }
             }
         }
