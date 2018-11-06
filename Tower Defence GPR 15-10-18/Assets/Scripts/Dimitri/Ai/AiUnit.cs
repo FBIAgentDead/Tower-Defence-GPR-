@@ -30,10 +30,12 @@ public class AiUnit : MonoBehaviour {
     private void APathfinding()
     {
         GridMaster grid = gameObject.AddComponent<GridMaster>();//list for all the tiles
-        List<Tile> open = new List<Tile>();//list for all tiles that still have 2 be checked
-        List<Tile> closed = new List<Tile>();//tiles that have been checked
+        Tile[,] open = grid.mainGrid.tiles;//list for all tiles that still have 2 be checked
+        Tile[,] closed = new Tile[Mathf.RoundToInt(grid.mainGrid.tileSizeY),Mathf.RoundToInt(grid.mainGrid.tileSizeX)];//tiles that have been checked
         
-        // for(int i = 0; i < )
+        for(int i = 0; i < grid.mainGrid.tiles.Length; i++){
+
+        }
 
         //this below is going to be looped to find the right path the lists stay filled
 
@@ -42,18 +44,9 @@ public class AiUnit : MonoBehaviour {
             //when AIunit reached enemy base
         }
         else{
-            closed.Add(grid.mainGrid.GetTile(unit.transform.position));
+            
         }
 
-        //gets all the parent Tiles not 8 but 4 cause you can't go diognal in the game
-        if(grid.mainGrid.GetTile(unit.transform.position, 1).getTileType == TileTypes.Path)
-            open.Add(grid.mainGrid.GetTile(unit.transform.position, 1));
-        if (grid.mainGrid.GetTile(unit.transform.position, -1).getTileType == TileTypes.Path)
-            open.Add(grid.mainGrid.GetTile(unit.transform.position, -1));
-        if (grid.mainGrid.GetTile(unit.transform.position, 0, 1).getTileType == TileTypes.Path)
-            open.Add(grid.mainGrid.GetTile(unit.transform.position, 0, 1));
-        if (grid.mainGrid.GetTile(unit.transform.position, 0, -1).getTileType == TileTypes.Path)
-            open.Add(grid.mainGrid.GetTile(unit.transform.position, 0, -1));
         //to be continued...
     }
     
