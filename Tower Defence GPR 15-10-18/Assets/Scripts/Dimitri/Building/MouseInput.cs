@@ -18,10 +18,12 @@ public class MouseInput : MonoBehaviour {
 	{
 		if(Input.GetMouseButtonDown(0)){
 			GameObject building;
-			if(tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType == TileTypes.BuildBlock && PlayerPrefs.GetString("choice", null) != null){
+			if(tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType == TileTypes.BuildBlock){
 				Debug.Log(PlayerPrefs.GetString("choice"));
 				building = Resources.Load("Towers/"+PlayerPrefs.GetString("choice")) as GameObject;
-                tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType = TileTypes.Building;
+				if(building != null){
+                	tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).getTileType = TileTypes.Building;
+				}
 				GameObject clone = Instantiate(building,tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).position, Quaternion.identity);
 				clone.transform.parent = parentUnits.transform;
                 tileLocation.mainGrid.GetTile(clone.transform.position).UnitObject = clone;
