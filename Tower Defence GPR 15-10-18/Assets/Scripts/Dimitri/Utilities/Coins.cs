@@ -16,7 +16,7 @@ public class Coins : MonoBehaviour {
 	}
 
 	private void DisplayCoins(){
-		displayMoney.text = "Current Money: " + coins;
+		displayMoney.text = "Gold: " + coins;
 	}
 
 }
