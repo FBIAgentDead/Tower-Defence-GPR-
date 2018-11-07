@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Temp_CamMovement : MonoBehaviour {
+    [SerializeField]
+    private float moveToPlayerSpeed;
     Transform camT;
     [SerializeField]
     private float camMovementSpeed = 3.8f;
@@ -11,13 +13,14 @@ public class Temp_CamMovement : MonoBehaviour {
 	void Start () {
         camT = GetComponent<Transform>();
         PlayerReference = GameObject.Find("Player_Knight").GetComponent<PlayerScript>();
+        moveToPlayerSpeed = moveToPlayerSpeed/10;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        BorderCamera();
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            BorderCamera();
             LockOnPlayer();
         }
         else
@@ -48,10 +51,7 @@ public class Temp_CamMovement : MonoBehaviour {
 
     private void LockOnPlayer()
     {
-            Vector3 playerVector3 = PlayerReference.playerT.position;
-            Vector3 camVector3 = camT.position;
-            Vector3 diffBetweenCamAndPlayer = camVector3 - playerVector3;
-            camT.Translate(-diffBetweenCamAndPlayer.x * Time.deltaTime * 1.9f, -diffBetweenCamAndPlayer.y * Time.deltaTime * 1.9f, 0);
+            camT.position = new Vector3(Mathf.Lerp(camT.position.x, PlayerReference.playerT.position.x, 0.1f * moveToPlayerSpeed), Mathf.Lerp(camT.position.y, PlayerReference.playerT.position.y, 0.1f * moveToPlayerSpeed), camT.position.z);
     }
 
     private void BorderCamera()
