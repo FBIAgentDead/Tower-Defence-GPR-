@@ -26,7 +26,6 @@ public class MouseInput : MonoBehaviour {
 				}
 				GameObject clone = Instantiate(building,tileLocation.mainGrid.GetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).position, Quaternion.identity);
 				clone.transform.parent = parentUnits.transform;
-                tileLocation.mainGrid.GetTile(clone.transform.position).UnitObject = clone;
 			}
 		}
 	}		

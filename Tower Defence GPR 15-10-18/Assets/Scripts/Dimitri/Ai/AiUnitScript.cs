@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Directions {Left, Right, Up, Down}
-public class AiUnit : MonoBehaviour {
+public class AiUnitScript : MonoBehaviour {
 
     [SerializeField]
     GameObject unit;
@@ -26,28 +26,35 @@ public class AiUnit : MonoBehaviour {
     public int getHealth { set { getHealth = value; } get { return unitHealth; } }
     public Vector2 position { get {return unit.transform.position; } }
 
-    //AI movement with the algorithm A*
-    private void APathfinding()
-    {
-        GridMaster grid = gameObject.AddComponent<GridMaster>();//list for all the tiles
-        Tile[,] open = grid.mainGrid.tiles;//list for all tiles that still have 2 be checked
-        Tile[,] closed = new Tile[Mathf.RoundToInt(grid.mainGrid.tileSizeY),Mathf.RoundToInt(grid.mainGrid.tileSizeX)];//tiles that have been checked
+    // //AI movement with the algorithm A*
+    // private void APathfinding()
+    // {
+    //     GridMaster grid = gameObject.AddComponent<GridMaster>();//list for all the tiles
+    //     Tile[,] open = grid.mainGrid.tiles;//list for all tiles that still have 2 be checked
+    //     Tile[,] closed = new Tile[Mathf.RoundToInt(grid.mainGrid.tileSizeY),Mathf.RoundToInt(grid.mainGrid.tileSizeX)];//tiles that have been checked
         
-        for(int i = 0; i < grid.mainGrid.tiles.Length; i++){
+    //     for(int i = 0; i < grid.mainGrid.tiles.Length; i++){
 
-        }
+    //     }
 
-        //this below is going to be looped to find the right path the lists stay filled
+    //     //this below is going to be looped to find the right path the lists stay filled
 
-        //check if current tile is finish
-        if(grid.mainGrid.GetTile(unit.transform.position).getTileType == TileTypes.EnemyBase){
-            //when AIunit reached enemy base
-        }
-        else{
+    //     //check if current tile is finish
+    //     if(grid.mainGrid.GetTile(unit.transform.position).getTileType == TileTypes.EnemyBase){
+    //         //when AIunit reached enemy base
+    //     }
+    //     else{
             
-        }
+    //     }
 
-        //to be continued...
+    //     //to be continued...
+    // }
+
+    void Update()
+    {
+        // if(tiles.mainGrid.tiles[0,0].getObjects != null){
+        //     Debug.Log(tiles.mainGrid.tiles[0,0].getObjects[0].transform.position);
+        // }
     }
     
     //using a enum to move left up down right

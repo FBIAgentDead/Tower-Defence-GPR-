@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Tile{
 
     private float positionX;
     private float positionY;
-
-    private GameObject tileObject;
 
     //constructor
     public Tile(float x, float y, TileTypes tileTypes)
@@ -19,7 +18,6 @@ public class Tile{
     //returns current tile position with the use of vectors
     public Vector3 position { get { return new Vector3(positionX,positionY, 1); } }
     public TileTypes getTileType { set; get; }
-    public GameObject UnitObject { get{ return tileObject; } set{ tileObject = value; } }
     
     //this will show the tile and pls don't let me explain the formula
     public void DrawTile(float width, float height, float tileCountX, float tileCountY, bool horizontal)
