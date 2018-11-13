@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 222324452795171158}
   m_Layer: 0
   m_Name: Unit_test
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   unitHealth: 0
   unitDamage: 0
   unitSpeed: 3
-  path: 00000000030000000000000003000000000000000200000000000000020000000000000002000000000000000200000000000000
+  path: 0100000003000000
   tiles: {fileID: 0}
 --- !u!212 &212385112672999644
 SpriteRenderer:

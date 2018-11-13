@@ -8,7 +8,7 @@ public class SpawnBehavior : MonoBehaviour {
 	private Directions[] spawnPath;
 	[SerializeField]
 	GameObject[] enemies;
-	private AiUnit setPath;
+	private AiUnitScript setPath;
 	[SerializeField]
 	private float respawnTime;
 	[SerializeField]
@@ -23,7 +23,7 @@ public class SpawnBehavior : MonoBehaviour {
 	{
 		while(true){
 			GameObject currentEnemie = enemies[Random.Range(0, enemies.Length)];
-			setPath = currentEnemie.GetComponent<AiUnit>();
+			setPath = currentEnemie.GetComponent<AiUnitScript>();
 			setPath.path = spawnPath;
 			GameObject enenmieClone = Instantiate(currentEnemie, transform.position, Quaternion.identity);
             enenmieClone.transform.SetParent(parentEnemies.transform);

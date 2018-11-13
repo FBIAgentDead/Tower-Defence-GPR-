@@ -100,9 +100,4 @@ public class GridScript{
         }
     }
 
-    // paste grid numbers for ez path implementation
-    public void GridPrint(){
-
-    }
-
 }
