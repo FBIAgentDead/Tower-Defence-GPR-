@@ -24,11 +24,7 @@ GameObject:
   - component: {fileID: 222324452795171158}
   m_Layer: 0
   m_Name: Unit_test
-<<<<<<< HEAD
-  m_TagString: EnemyOne
-=======
   m_TagString: Enemy
->>>>>>> 4e4f148aaa2115f791c55b1b31567e54de925afd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
