@@ -9,8 +9,8 @@ public class Temp_CamMovement : MonoBehaviour {
     [SerializeField]
     private float camMovementSpeed = 3.8f;
     PlayerScript PlayerReference;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         camT = GetComponent<Transform>();
         PlayerReference = GameObject.Find("Player_Knight").GetComponent<PlayerScript>();
         moveToPlayerSpeed = moveToPlayerSpeed/10;
@@ -35,11 +35,11 @@ public class Temp_CamMovement : MonoBehaviour {
         {
             camT.transform.Translate(0, camMovementSpeed * Time.deltaTime, 0);
         }
-        if (Input.GetKey(KeyCode.A) && camT.transform.position.x > 8.3715)
+        if (Input.GetKey(KeyCode.A) && camT.transform.position.x > 8.3715f)
         {
             camT.transform.Translate(-camMovementSpeed * 1.5f * Time.deltaTime, 0, 0);
         }
-        if (Input.GetKey(KeyCode.S) && camT.transform.position.y > -10.58793)
+        if (Input.GetKey(KeyCode.S) && camT.transform.position.y > -10.58793f)
         {
             camT.transform.Translate(0, -camMovementSpeed * Time.deltaTime, 0);
         }
@@ -56,6 +56,21 @@ public class Temp_CamMovement : MonoBehaviour {
 
     private void BorderCamera()
     {
-
+        if (camT.transform.position.y > -4.501292f)
+        {
+            camT.position = new Vector3(camT.position.x, -4.501292f, camT.position.z);
+        }
+        if (camT.transform.position.y < -10.58793f)
+        {
+            camT.position = new Vector3(camT.position.x, -10.58793f, camT.position.z);
+        }
+        if (camT.transform.position.x < 8.3715f)
+        {
+            camT.position = new Vector3(8.3715f, camT.position.y, camT.position.z);
+        }
+        if (camT.transform.position.x > 27.63964f)
+        {
+            camT.position = new Vector3(27.63964f, camT.position.y, camT.position.z);
+        }
     }
 }
