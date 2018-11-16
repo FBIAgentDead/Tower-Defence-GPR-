@@ -23,7 +23,7 @@ public class AiUnitScript : MonoBehaviour {
     }
 
 
-    public int getHealth { set { getHealth = value; } get { return unitHealth; } }
+    public int getHealth { get { return unitHealth; } set { unitHealth = value; } }
     public Vector2 position { get {return unit.transform.position; } }
 
     // //AI movement with the algorithm A*
