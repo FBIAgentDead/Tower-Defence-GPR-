@@ -28,6 +28,8 @@ public class GridMaster : MonoBehaviour {
         gridObjects = GameObject.FindGameObjectsWithTag(gridObjectsTag);
         GameObjectPosition();
         TileCleaner();
+        PlayerPrefs.SetString("choice", "Archer Tower");
+		Debug.Log(PlayerPrefs.GetString("choice", "oof"));
 	}
 	
 	void Update()

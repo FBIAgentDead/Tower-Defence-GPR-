@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212385112672999644}
   - component: {fileID: 114147328231983738}
   - component: {fileID: 222324452795171158}
+  - component: {fileID: 61603335386002434}
   m_Layer: 0
   m_Name: Unit_test
   m_TagString: Enemy
@@ -29,6 +30,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!61 &61603335386002434
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500389474947268}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.007087387, y: -0.019821703}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.39, y: 0.37}
+    newSize: {x: 0.39, y: 0.37}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.35314596, y: 0.3303566}
+  m_EdgeRadius: 0
 --- !u!114 &114147328231983738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,10 +67,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 1500389474947268}
-  unitHealth: 0
+  unitHealth: 10
   unitDamage: 0
   unitSpeed: 3
-  path: 0100000003000000
+  path: 01000000020000000100000003000000010000000300000000000000
   tiles: {fileID: 0}
 --- !u!212 &212385112672999644
 SpriteRenderer:
@@ -114,6 +140,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.11, y: -4.95}
+  m_AnchoredPosition: {x: 16.00304, y: -10.909338}
   m_SizeDelta: {x: 0.39, y: 0.37}
   m_Pivot: {x: 0.5, y: 0.5}

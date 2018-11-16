@@ -81,9 +81,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ed1bba7a5947f4898aa14d4d017825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRange: 2
+  bulletType: {fileID: 1462578102947518, guid: 8cf1d608aedc592438b97562d5ae0e5f, type: 2}
+  detectRange: 3
   towerDamage: 0
-  attackSpeed: 0
+  attackSpeed: 1000
+  projectileSpeed: 0.01
   building: {fileID: 1777731659672364, guid: 0372ebe9983748841a6ba10f62fbcd1a, type: 2}
 --- !u!212 &212127714398679028
 SpriteRenderer:
