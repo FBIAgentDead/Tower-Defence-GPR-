@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField]
     private LayerMask enemyLayer;
     [SerializeField]
-    private float checkDistance;
+    private float checkDistance = 1;
 	private void Start () {
         playerT = GetComponent<Transform>();
         playerAnimator = GetComponent<Animator>();
@@ -27,19 +27,15 @@ public class PlayerScript : MonoBehaviour {
 	private void Update () {
         MovePlayer();
 	}
-
+    //Player Movement and Attack Activation
     private void MovePlayer()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             AnimateAttack();
             isAbleToMove = false;
-            GameObject enemy = PlayerAttack();
-            if (enemy != null)
-            {
-                Debug.Log("oef");
-                //scriptReferenceEnemy = enemy.GetComponent<AiUnit>();
-            }
+            PlayerAttack();
+
         }
         else if (Input.GetKey(KeyCode.W) && isAbleToMove && playerT.position.y < 0.7f)
         {
@@ -70,7 +66,7 @@ public class PlayerScript : MonoBehaviour {
             playerAnimator.Play("IdleAnim");
         }
 
-
+        //Attack Animation Timer
         if (!isAbleToMove)
         {
             attackTimer += Time.deltaTime;
@@ -82,29 +78,32 @@ public class PlayerScript : MonoBehaviour {
         }
 
     }
-
-    private GameObject PlayerAttack()
+    //Actual Player Attack using Raycasts
+    private void PlayerAttack()
     {
         RaycastHit2D enemyHit;
         if (facingDirection == "up")
         {
             enemyHit = Physics2D.Raycast(transform.position, Vector2.up, checkDistance, enemyLayer);
+            Debug.DrawRay(transform.position, Vector2.up, Color.blue, 1.5f);
         }
         else if (facingDirection == "left")
         {
             enemyHit = Physics2D.Raycast(transform.position, Vector2.left, checkDistance, enemyLayer);
+            Debug.DrawRay(transform.position, Vector2.left, Color.blue, 1.5f);
         }
         else if (facingDirection == "down")
         {
             enemyHit = Physics2D.Raycast(transform.position, Vector2.down, checkDistance, enemyLayer);
+            Debug.DrawRay(transform.position, Vector2.down, Color.blue, 1.5f);
         }
         else// this is right
         {
             enemyHit = Physics2D.Raycast(transform.position, Vector2.right, checkDistance, enemyLayer);
+            Debug.DrawRay(transform.position, Vector2.right, Color.blue, 1.5f);
         }
-        return enemyHit.transform.gameObject;
     }
-
+    //Animations for Attacks, dependant on the facingDirection
     private void AnimateAttack()
     {
         if (facingDirection == "up")
